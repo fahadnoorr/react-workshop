@@ -8,7 +8,7 @@ import LessonCompProps from './3_LessonCompProps/LessonCompProps';
 import LessonStateLifeHooks from './4_LessonStateLifeHooks/LessonStateLifeHooks';
 import LessonConditionalRenders from './5_LessonConditionalRenders/LessonConditionalRenders';
 import LessonStateLiftup from './6_LessonStateLiftup/LessonStateLiftup';
-import LessonContainerPresentational from './7_LessonContainerPresentational/LessonContainerPresentational';
+import AirlineComponent from './7_LessonContainerPresentational/AirlineComponent';
 import LessonUserData from './8_LessonUserData/LessonUserData';
 import LessonAPIIntegration from './9_LessonAPIIntegration/LessonAPIIntegration';
 
@@ -32,7 +32,7 @@ class Lessons extends Component {
 
 
     this.state = {
-      activeLesson: LESSON_TYPES.JSX,
+      activeLesson: LESSON_TYPES.CONTAINER_PRESENT,
     };
   }
 
@@ -58,7 +58,7 @@ class Lessons extends Component {
       case LESSON_TYPES.STATE_LIFTUP:
         return <LessonStateLiftup title={LESSON_TYPES.STATE_LIFTUP} />;
       case LESSON_TYPES.CONTAINER_PRESENT:
-        return <LessonContainerPresentational title={LESSON_TYPES.CONTAINER_PRESENT} />;
+        return <AirlineComponent />;
       case LESSON_TYPES.USER_DATA:
         return <LessonUserData title={LESSON_TYPES.USER_DATA} />;
       case LESSON_TYPES.API_INTEGRATION:
