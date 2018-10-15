@@ -1,5 +1,7 @@
 import React from 'react'
 
+import '../git_dashboard.css'
+
 const Dashboard = props => {
     return (
         <div className="card">
@@ -48,10 +50,11 @@ const CardList = props => {
 
 const UserCard = props => {
 
-    let {avatar_url, login, url, type, repos_url, repoHandler} = props;
+    let {avatar_url, login, url, type} = props.user;
+    let {repoHandler, viewRepos} = props;
 
     let viewReposHandler = (event) => {
-        repoHandler(repos_url)
+        repoHandler(props.user)
     };
 
     return (
@@ -64,12 +67,17 @@ const UserCard = props => {
                     <div className='col-md-1'></div>
                     <div className='col-md-5'>
                         <table>
-                            <tr><td>Login:</td><td>{login}</td></tr>
-                            <tr><td>URL:</td><td><a href={url}>{login}</a></td></tr>
-                            <tr><td>Type:</td><td>{type}</td></tr>
+                            <tbody>
+                                <tr><td>Login:</td><td>{login}</td></tr>
+                                <tr><td>URL:</td><td><a href={url}>{login}</a></td></tr>
+                                <tr><td>Type:</td><td>{type}</td></tr>
+                            </tbody>
                         </table>
                         <br />
-                        <button className='btn btn-primary' onClick={viewReposHandler}>View Repositories</button>
+                        {
+                            viewRepos &&
+                            <button className='btn btn-primary' onClick={viewReposHandler}>View Repositories</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -84,17 +92,20 @@ const RepoCard = props => {
 
     return (
         <Card>
-            <div><a href={html_url}>{name}</a></div>
-            <table>
-                <tr><td>Description</td><td>{description}</td></tr>
-                <tr><td>Default Branch</td><td>{default_branch}</td></tr>
-                <tr><td>Language</td><td>{language}</td></tr>
-                <tr><td>Last Updated at</td><td>{updated_at}</td></tr>
-                <tr><td>License</td><td>{license}</td></tr>
-                <tr><td>Stars</td><td>{stargazers_count}</td></tr>
-                <tr><td>Open Issues</td><td>{open_issues_count}</td></tr>
-                <tr><td>Public</td><td>{is_private ? 'No' : 'Yes'}</td></tr>
-                <tr><td>URL</td><td><a href={html_url}>{html_url}</a></td></tr>
+            <div className='text-center'><a href={html_url}>{name}</a></div>
+            <br/>
+            <table className='repo-card-table'>
+                <tbody>
+                    <tr><td>Description</td><td>{description ? description: 'N/A'}</td></tr>
+                    <tr><td>Default Branch</td><td><code>{default_branch}</code></td></tr>
+                    <tr><td>Language</td><td>{language}</td></tr>
+                    <tr><td>Last Updated at</td><td>{updated_at}</td></tr>
+                    <tr><td>License</td><td>{license ? license.name : 'N/A'}</td></tr>
+                    <tr><td>Stars</td><td>{stargazers_count}</td></tr>
+                    <tr><td>Open Issues</td><td>{open_issues_count}</td></tr>
+                    <tr><td>Public</td><td>{is_private ? 'No' : 'Yes'}</td></tr>
+                    <tr><td>URL</td><td><a href={html_url}>{html_url}</a></td></tr>
+                </tbody>
             </table>
         </Card>
     );

@@ -1,5 +1,5 @@
 import React from 'react'
-import Dashboard, {Search, CardList, RepoCard} from './components/Dashboard'
+import Dashboard, {Search, CardList, RepoCard, UserCard} from './components/Dashboard'
 import Error from './components/Error'
 import axios from 'axios'
 import ReactLoader from "react-loading";
@@ -26,10 +26,10 @@ export default class GitReposDashboard extends React.Component{
                 let repos = data.map(
                     ({
                          name, html_url, description, default_branch, language, updated_at, license, stargazers_count,
-                         open_issues_count, private: is_private
+                         open_issues_count, private: is_private, id
                      }) => ({
                         name, html_url, description, default_branch, language, updated_at, license, stargazers_count,
-                        open_issues_count, is_private
+                        open_issues_count, is_private, id
                     })
                 );
                 this.setState({
@@ -62,10 +62,12 @@ export default class GitReposDashboard extends React.Component{
                 {isError && <Error error='Could not load Repos' />}
                 {showResults &&
                 <div>
+                    <UserCard user={this.user} />
+                    <br/>
                     <Search placeholder='Search Repos' query={searchQuery} results={filteredRepos.length}
                             onChange={this.searchHandler} />
                     <CardList title='Repos'>
-                        {filteredRepos.map(repo => <RepoCard {...repo} />)}
+                        {filteredRepos.map(repo => <RepoCard key={repo.id} {...repo} />)}
                     </CardList>
                 </div>
                 }

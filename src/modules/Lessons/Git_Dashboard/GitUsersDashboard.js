@@ -23,7 +23,7 @@ export default class GitUsersDashboard extends React.Component{
         axios.get(GIT_USERS_URL)
             .then(({data}) => {
                 let users = data.map(
-                    ({login, avatar_url, url, repos_url, type}) => ({login, avatar_url, url, repos_url, type})
+                    ({id, login, avatar_url, url, repos_url, type}) => ({id, login, avatar_url, url, repos_url, type})
                 );
                 this.setState({
                     users: users,
@@ -42,6 +42,11 @@ export default class GitUsersDashboard extends React.Component{
         });
     };
 
+    viewUserRepos = (user) => {
+        let {switchDashboard, dashboards} = this.props;
+        switchDashboard(dashboards.repos, user);
+    };
+
     render(){
 
         let {users, isLoading, isError, searchQuery} = this.state;
@@ -58,7 +63,11 @@ export default class GitUsersDashboard extends React.Component{
                         <Search placeholder='Search Users' query={searchQuery} results={filteredUsers.length}
                                 onChange={this.searchHandler} />
                         <CardList title='Users'>
-                            {filteredUsers.map(user => <UserCard {...user} />)}
+                            {
+                                filteredUsers.map(
+                                    user => <UserCard key={user.id} user={user} viewRepos repoHandler={this.viewUserRepos} />
+                                )
+                            }
                         </CardList>
                     </div>
                 }
