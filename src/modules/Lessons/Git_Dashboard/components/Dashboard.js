@@ -77,9 +77,33 @@ const UserCard = props => {
     );
 };
 
+const RepoCard = props => {
+
+    let {name, html_url, description, default_branch, language, updated_at, license, stargazers_count,
+        open_issues_count, is_private} = props;
+
+    return (
+        <Card>
+            <div><a href={html_url}>{name}</a></div>
+            <table>
+                <tr><td>Description</td><td>{description}</td></tr>
+                <tr><td>Default Branch</td><td>{default_branch}</td></tr>
+                <tr><td>Language</td><td>{language}</td></tr>
+                <tr><td>Last Updated at</td><td>{updated_at}</td></tr>
+                <tr><td>License</td><td>{license}</td></tr>
+                <tr><td>Stars</td><td>{stargazers_count}</td></tr>
+                <tr><td>Open Issues</td><td>{open_issues_count}</td></tr>
+                <tr><td>Public</td><td>{is_private ? 'No' : 'Yes'}</td></tr>
+                <tr><td>URL</td><td><a href={html_url}>{html_url}</a></td></tr>
+            </table>
+        </Card>
+    );
+};
+
 export default Dashboard;
 export {
     Search,
     CardList,
     UserCard,
+    RepoCard,
 };
