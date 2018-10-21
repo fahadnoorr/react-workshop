@@ -1,14 +1,14 @@
 import React from 'react';
 
 import Intro from './components/APIIntegrationIntro';
-import PracticeAPIIntegration from './components/PracticeAPIIntegration';
+import DashboardManager from '../Git_Dashboard/DashboardManager'
 
 const LessonAPIIntegration = ({title}) => {
   return (
       <div className="lesson-container">
         <Intro title={title} />
         <div className="lesson-parts">
-          <PracticeAPIIntegration />
+          <DashboardManager/>
         </div>
       </div>
   );
