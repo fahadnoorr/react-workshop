@@ -3,6 +3,7 @@ import Dashboard, {Search, CardList, RepoCard, UserCard} from './components/Dash
 import Error from './components/Error'
 import axios from 'axios'
 import ReactLoader from "react-loading";
+import {Link} from 'react-router-dom'
 
 export default class GitReposDashboard extends React.Component{
 
@@ -16,11 +17,11 @@ export default class GitReposDashboard extends React.Component{
             searchQuery: ''
         };
 
-        this.user = props.user;
+        this.linkParams = props.match.params;
     }
 
     componentDidMount(){
-        let url = `https://api.github.com/users/${this.user.login}/repos`;
+        let url = `https://api.github.com/users/${this.linkParams.login}/repos`;
         axios.get(url)
             .then(({data}) => {
                 let repos = data.map(
@@ -53,6 +54,7 @@ export default class GitReposDashboard extends React.Component{
 
         let {repos, isLoading, isError, searchQuery} = this.state;
         let showResults = !isLoading && !isError;
+        let {goBack} = this.props.history;
 
         let filteredRepos = searchQuery.length ? repos.filter(({name}) => name.includes(searchQuery)) : repos;
 
@@ -62,8 +64,16 @@ export default class GitReposDashboard extends React.Component{
                 {isError && <Error error='Could not load Repos' />}
                 {showResults &&
                 <div>
-                    <UserCard user={this.user} />
+                    <div className='row'>
+                        <div className='col-md-9'>
+                            <h3>{`${this.linkParams.login}'s Repos`}</h3>
+                        </div>
+                        <div className='col-md-3'>
+                            <button className='btn btn-primary float-right' onClick={goBack}>View all Users</button>
+                        </div>
+                    </div>
                     <br/>
+
                     <Search placeholder='Search Repos' query={searchQuery} results={filteredRepos.length}
                             onChange={this.searchHandler} />
                     <CardList title='Repos'>

@@ -43,8 +43,7 @@ export default class GitUsersDashboard extends React.Component{
     };
 
     viewUserRepos = (user) => {
-        let {switchDashboard, dashboards} = this.props;
-        switchDashboard(dashboards.repos, user);
+        this.props.history.push(`${this.props.match.url}/${user.login}`);
     };
 
     render(){
