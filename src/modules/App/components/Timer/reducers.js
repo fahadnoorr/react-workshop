@@ -1,4 +1,4 @@
-import {START_TIME, STOP_TIME} from './actions';
+import {START_TIME, STOP_TIME, UPDATE_TIME} from './actions';
 
 const initialState = {
     time: 'Start Timer',
@@ -11,6 +11,8 @@ const timeReducer = (state = initialState, action) => {
             return {...state, active: true};
         case STOP_TIME:
             return {...state, active: false};
+        case UPDATE_TIME:
+            return {...state, time: action.payload};
         default:
             return state;
     }

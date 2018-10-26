@@ -42,16 +42,24 @@ class ConnectedTimer extends React.Component{
         clearInterval(this.timeInterval);
     }
 
+    handleClick = () => {
+        let {active, startTime, stopTime} = this.props;
+        if (active){
+            stopTime();
+        } else {
+            startTime();
+        }
+    };
+
 
     render() {
 
-        let {time, active, startTime, stopTime} = this.props;
-        let handleClick = active ? stopTime : startTime;
+        let {time, active} = this.props;
 
         return (
             <div>
-                <span>{active ? time : 'Start Timer'}</span>&nbsp;&nbsp;
-                <button onClick={handleClick}>
+                <span>{time}</span>&nbsp;&nbsp;
+                <button onClick={this.handleClick}>
                     {active ? 'Stop' : 'Start'}
                 </button>
             </div>
