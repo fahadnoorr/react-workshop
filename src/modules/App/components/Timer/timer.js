@@ -26,28 +26,20 @@ class ConnectedTimer extends React.Component{
         this.timeInterval = null;
     }
 
-
-    componentWillReceiveProps(nextProps){
-        let {active, updateTime} = nextProps;
-        if (active){
-            this.timeInterval = setInterval(() => {
-                updateTime(new Date().toLocaleTimeString());
-            }, 1000);
-        } else {
-            clearInterval(this.timeInterval);
-        }
-    }
-
     componentWillUnmount() {
         clearInterval(this.timeInterval);
     }
 
     handleClick = () => {
-        let {active, startTime, stopTime} = this.props;
+        let {active, startTime, stopTime, updateTime} = this.props;
         if (active){
+            clearInterval(this.timeInterval);
             stopTime();
         } else {
             startTime();
+            this.timeInterval = setInterval(() => {
+                updateTime(new Date().toLocaleTimeString());
+            }, 1000);
         }
     };
 
