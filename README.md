@@ -7,11 +7,11 @@ A hands-on workshop :computer: on building Web Apps with React
 #### Agenda
 
 * [x] Create a basic react-app with Navigation
-* [ ] Integrate ESLint for standardized JS, ES6 coding
-* [ ] Integrate Prettier for easy formatting of JS
-* [ ] Integrate `redux`
-* [ ] Update `Dashboard` to use `redux` state
-* [ ] Create `DashboardTimer` & display it on top-right in `Header`
+* [x] Integrate ESLint for standardized JS, ES6 coding
+* [x] Integrate Prettier for easy formatting of JS
+* [x] Integrate `redux`
+* [x] Update `Dashboard` to use `redux` state
+* [x] Create `DashboardTimer` & display it on top-right in `Header`
 * [ ] Redirect from dashboard to `contacts/`
 * [ ] Implement Generic API Caller
 * [ ] Implement Contacts View under `/contacts/`
